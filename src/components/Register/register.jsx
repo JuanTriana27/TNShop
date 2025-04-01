@@ -18,10 +18,10 @@ const Register = () => {
 
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            console.log('Usuario registrado:', userCredential.user); // Usar la variable
             setMensaje(`¡Registro exitoso! Redirigiendo...`);
 
             setTimeout(() => navigate('/login'), 2000);
-
         } catch (err) {
             if (err.code === 'auth/email-already-in-use') {
                 setError('⚠️ El correo ya está registrado. ¿Quieres:');
