@@ -53,7 +53,7 @@ const Sidebar = () => {
                     if (userDoc.exists()) {
                         const userData = userDoc.data();
                         // Actualiza el objeto usuario para incluir displayName (nombre de usuario)
-                        setUser(prevUser => ({ ...prevUser, displayName: userData.username }));
+                        setUser(prevUser => ({ ...prevUser, displayName: userData.displayName }));
                     }
                 } catch (error) {
                     console.error('Error fetching user data:', error);
