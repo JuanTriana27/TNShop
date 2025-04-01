@@ -5,11 +5,7 @@ import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../../firebaseConfig';
 import '../../assets/css/sidebar.css';
 
-const Sidebar = () => {
-    const [isCollapsed, setIsCollapsed] = useState(() => {
-        const savedState = localStorage.getItem('sidebarCollapsed');
-        return savedState ? JSON.parse(savedState) : false;
-    });
+const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
     const [user, setUser] = useState(null);
     const location = useLocation();
 
@@ -28,7 +24,7 @@ const Sidebar = () => {
 
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
-    }, [isCollapsed]);
+    }, [isCollapsed, setIsCollapsed]); // Añade setIsCollapsed aquí
 
     // Escucha los cambios de autenticación
     useEffect(() => {
@@ -66,7 +62,12 @@ const Sidebar = () => {
     const isActive = (path) => (location.pathname === path ? 'active' : '');
 
     return (
-        <nav className={`sidebar ${isCollapsed ? 'collapsed' : ''}`}>
+        <nav
+            className={`sidebar ${isCollapsed ? 'collapsed' : ''}`}
+            style={{
+                '--sidebar-width': isCollapsed ? '5rem' : '18rem'
+            }}
+        >
             <div className="sidebar-top-wrapper">
                 <div className="sidebar-top">
                     <Link to="/" className="logo_wrapper">

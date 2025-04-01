@@ -1,0 +1,113 @@
+/* topnav.css */
+.top-nav {
+    position: fixed;
+    top: 1.5rem;
+    left: calc(18rem + 3rem);
+    right: 1.5rem;
+    height: 5rem;
+    background: var(--sidebar-bg);
+    color: var(--text);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    padding: 0 1.5rem;
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.top-nav.sidebar-collapsed {
+    left: calc(5rem + 3rem);
+    /* Sidebar colapsado + mismos márgenes */
+}
+
+.nav-content {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo span {
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: var(--primary);
+}
+
+.nav-right {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.nav-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.nav-icon:hover {
+    background: var(--sidebar-primary-hover);
+    color: var(--white);
+}
+
+.nav-icon svg {
+    width: 1.75rem;
+    height: 1.75rem;
+    stroke: currentColor;
+}
+
+.mobile-menu {
+    display: none;
+}
+
+/* Efectos hover iguales al sidebar */
+.nav-icon:hover svg {
+    stroke: var(--white);
+}
+
+/* Logout específico */
+.nav-icon.logout:hover {
+    background: var(--logout);
+}
+
+/* Responsive idéntico al sidebar */
+@media (max-width: 768px) {
+    .top-nav {
+        left: 1.5rem !important;
+        right: 1.5rem;
+        height: 4rem;
+    }
+
+    .mobile-menu {
+        display: flex;
+    }
+
+    .nav-logo span {
+        font-size: 1rem;
+    }
+
+    .nav-icon {
+        width: 2.25rem;
+        height: 2.25rem;
+    }
+
+    .nav-icon svg {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .top-nav {
+        left: 0 !important;
+        right: 0;
+        top: 0;
+        border-radius: 0;
+    }
+}

@@ -37,7 +37,7 @@ html {
     top: 1.5rem;
     left: 1.5rem;
     bottom: 1.5rem;
-    width: 18rem;
+    width: var(--sidebar-width, 18rem);
     padding: 1.5rem 1rem;
     background: var(--sidebar-bg);
     border-radius: 15px;

@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { auth } from '../../firebaseConfig';
 import { signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import Sidebar from '../Sidebar/sidebar';
+import TopNav from '../TopNav/topnav';
+import '../../assets/css/home.css'
 
 const Home = () => {
     const navigate = useNavigate();
+    const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
     const handleLogout = async () => {
         try {
@@ -18,25 +21,18 @@ const Home = () => {
 
     return (
         <div className="home-container">
-            <Sidebar />
-            <div className="main-content">
+            <Sidebar
+                isCollapsed={isSidebarCollapsed}
+                setIsCollapsed={setIsSidebarCollapsed}
+            />
+            <TopNav
+                isSidebarCollapsed={isSidebarCollapsed}
+                handleLogout={handleLogout}
+            />
 
+            <div className="main-content">
                 <h1>¡Bienvenido {auth.currentUser?.email}!</h1>
                 <p>Has accedido al área privada</p>
-                <button
-                    onClick={handleLogout}
-                    style={{
-                        padding: '10px 20px',
-                        backgroundColor: '#dc3545',
-                        color: 'white',
-                        border: 'none',
-                        borderRadius: '5px',
-                        cursor: 'pointer',
-                        marginTop: '20px'
-                    }}
-                >
-                    Cerrar Sesión
-                </button>
             </div>
         </div>
     );
