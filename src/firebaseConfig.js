@@ -1,8 +1,7 @@
 // src/firebaseConfig.js
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
-// Si quieres usar Firestore, también importa:
-// import { getFirestore } from 'firebase/firestore';
+import { getFirestore } from 'firebase/firestore'; // Importa Firestore
 
 const firebaseConfig = {
     apiKey: "AIzaSyD61Qvr0cAqK7b_j0hJlAFNvS-t7gSxZMQ",
@@ -20,7 +19,7 @@ const app = initializeApp(firebaseConfig);
 // Inicializa la autenticación y expórtala
 export const auth = getAuth(app);
 
-// Si deseas usar Firestore, inicialízalo así:
-// export const db = getFirestore(app);
+// Inicializa Firestore y expórtalo
+export const db = getFirestore(app);
 
 export default app;

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../firebaseConfig';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
+import { auth, db } from '../../firebaseConfig';
 import { useNavigate } from 'react-router-dom';
 import '../../assets/css/register.css';
 
 const Register = () => {
+    const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [mensaje, setMensaje] = useState('');
@@ -17,10 +19,21 @@ const Register = () => {
         setError('');
 
         try {
+            // Crear usuario en Firebase Auth
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-            console.log('Usuario registrado:', userCredential.user); // Usar la variable
-            setMensaje(`¡Registro exitoso! Redirigiendo...`);
 
+            // Actualizar el perfil del usuario con el nombre de usuario
+            await updateProfile(userCredential.user, { displayName: username });
+
+            // Guardar datos adicionales en Firestore en la colección "users"
+            await setDoc(doc(db, "users", userCredential.user.uid), {
+                displayName: username,
+                email: email,
+                createdAt: new Date()
+            });
+
+            console.log('Usuario registrado:', userCredential.user);
+            setMensaje('¡Registro exitoso! Redirigiendo...');
             setTimeout(() => navigate('/login'), 2000);
         } catch (err) {
             if (err.code === 'auth/email-already-in-use') {
@@ -34,15 +47,29 @@ const Register = () => {
     return (
         <div className="auth-card">
             <div className="image-container"></div>
-
             <div className="form-container">
                 <h2>Registro de Usuario</h2>
-
                 <form onSubmit={handleRegister}>
+                    {/* Nuevo input para el nombre de usuario */}
+                    <div className="input-container">
+                        <span className="input-icon">
+                            {/* Puedes colocar un ícono aquí */}
+                        </span>
+                        <input
+                            type="text"
+                            className="input-field"
+                            placeholder="Ingresa tu nombre de usuario"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            required
+                        />
+                    </div>
+
                     <div className="input-container">
                         <span className="input-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" />
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                <polyline points="22,6 12,13 2,6" />
                             </svg>
                         </span>
                         <input
@@ -58,7 +85,8 @@ const Register = () => {
                     <div className="input-container">
                         <span className="input-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
                             </svg>
                         </span>
                         <input
