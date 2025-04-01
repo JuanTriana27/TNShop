@@ -1,8 +1,119 @@
+.home-container {
+    display: flex;
+    min-height: 100vh;
+    background-color: var(--bg);
+    position: relative;
+    overflow: hidden;
+}
+
 .main-content {
-    margin-left: 21rem; /* 18rem (sidebar) + 3rem (margen) */
-    transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: fixed;
+    top: 8rem;
+    left: calc(18rem + 3rem);
+    /* 18rem sidebar + 3rem margen */
+    right: 1.5rem;
+    bottom: 1.5rem;
+    padding: 2rem;
+    background-color: var(--sidebar-bg);
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: left 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Transición más suave */
+    overflow-y: auto;
+    z-index: 500;
 }
 
 .sidebar-collapsed .main-content {
-    margin-left: 8rem; /* 5rem (sidebar) + 3rem (margen) */
+    left: calc(5rem + 3rem);
+    /* 5rem sidebar colapsado + 3rem margen */
+}
+
+/* Mantenemos las mejoras solo para el contenido después del welcome */
+.quick-actions-grid,
+.feature-highlights {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.action-card,
+.feature-card {
+    background: var(--white);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.action-card:hover,
+.feature-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.action-card {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--sidebar-primary-hover) 100%);
+    color: var(--white);
+}
+
+.feature-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.action-card .feature-icon {
+    color: var(--white);
+}
+
+/* Responsive adjustments - Manteniendo la lógica original */
+@media (max-width: 1200px) {
+    .main-content {
+        left: calc(18rem + 1rem);
+        right: 1rem;
+    }
+
+    .sidebar-collapsed .main-content {
+        left: calc(5rem + 1rem);
+    }
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        top: 7rem;
+        left: 1rem !important;
+        right: 1rem;
+        bottom: 1rem;
+    }
+
+    .sidebar-collapsed .main-content {
+        left: 1rem !important;
+    }
+
+    .quick-actions-grid,
+    .feature-highlights {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-content {
+        padding: 1rem;
+        top: 6rem;
+    }
+
+    .action-card,
+    .feature-card {
+        min-height: 150px;
+        padding: 1rem;
+    }
+
+    .feature-icon {
+        font-size: 1.75rem;
+    }
 }
