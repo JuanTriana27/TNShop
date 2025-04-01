@@ -1,0 +1,212 @@
+/* Estilos base */
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(45deg, #566981, #89a7b1, #566981, #89a7b1);
+    background-size: 400% 400%;
+    animation: gradientAnimation 15s ease infinite;
+    font-family: 'Arial', sans-serif;
+}
+
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.login-card {
+    width: 950px;
+    height: 550px;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    background: white;
+    display: flex;
+}
+
+.image-container {
+    width: 50%;
+    background: url('https://atlmedios.com/wp-content/uploads/2019/09/ecommerce-atlmedios.jpg') center/cover;
+    position: relative;
+}
+
+.form-container {
+    width: 50%;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.form-container h2 {
+    color: #2c3e50;
+    font-size: 2rem;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.form-container p {
+    color: #7f8c8d;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Inputs */
+.input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin: 15px 0;
+    transition: all 0.3s ease;
+}
+
+.input-container:hover {
+    border-color: #999;
+}
+
+.input-container:focus-within {
+    border-color: #2196F3;
+    box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.1);
+}
+
+.input-icon {
+    padding: 0 15px;
+    color: #666;
+    display: flex;
+    align-items: center;
+    transition: color 0.3s ease;
+}
+
+.input-container:focus-within .input-icon {
+    color: #2196F3;
+}
+
+.input-field {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    background: transparent;
+    color: #2c3e50;
+}
+
+.input-field::placeholder {
+    color: #95a5a6;
+}
+
+/* Botones */
+button[type="submit"] {
+    width: 100%;
+    padding: 16px;
+    background: #566981;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background: #566981;
+    transform: translateY(-1px);
+    box-shadow: 0 5px 15px rgba(44, 138, 90, 0.3);
+}
+
+.register-link {
+    background: none;
+    border: none;
+    color: #2196F3;
+    cursor: pointer;
+    font-weight: 500;
+    padding: 2px 5px;
+    transition: all 0.3s ease;
+}
+
+.register-link:hover {
+    text-decoration: underline;
+    color: #1976d2;
+}
+
+.register-prompt {
+    text-align: center;
+    margin-top: 25px;
+    color: #7f8c8d;
+    font-size: 14px;
+}
+
+/* Responsividad profesional */
+@media (max-width: 992px) {
+    .login-card {
+        width: 700px;
+        height: auto;
+        margin: 30px;
+    }
+
+    .form-container {
+        padding: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .login-card {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .image-container {
+        width: 100%;
+        height: 200px;
+    }
+
+    .form-container {
+        width: 100%;
+        padding: 0px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding-bottom: 20px;
+    }
+
+    button[type="submit"] {
+        width: 500px;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-card {
+        width: 350px;
+        margin: auto;
+    }
+
+    .image-container {
+        height: 150px;
+    }
+
+    button[type="submit"],
+    .input-container {
+        width: 300px;
+    }
+
+    .form-container h2 {
+        font-size: 1.3rem;
+    }
+}
