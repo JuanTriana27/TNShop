@@ -70,7 +70,7 @@ const Sidebar = () => {
             <div className="sidebar-top-wrapper">
                 <div className="sidebar-top">
                     <Link to="/" className="logo_wrapper">
-                        <img src="/logo.svg" alt="Logo" className="logo-small" />
+                        <img src={require('../../assets/img/icono.svg').default} alt="Logo" className="logo-small" />
                         <span className="company-name">TNSHOP</span>
                     </Link>
                 </div>
